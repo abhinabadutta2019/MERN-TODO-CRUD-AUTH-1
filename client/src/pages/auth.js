@@ -37,31 +37,14 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    console.log("Form submitted");
-
     try {
-      const response = await fetch("http://localhost:3009/auth/register", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
+      await axios.post("http://localhost:3009/auth/register", {
+        username,
+        password,
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Registration successful:", data);
-        alert("Registration completed");
-      } else {
-        console.error("Registration failed");
-      }
+      alert("Registration Completed! Now login.");
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
     }
   };
 
