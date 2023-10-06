@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const Auth = () => {
   return (
@@ -16,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   //
-  console.log(username, "username Login");
+  // console.log(username, "username Login");
   //
   return (
     <Form
@@ -25,6 +26,7 @@ const Login = () => {
       password={password}
       setPassword={setPassword}
       label="Login"
+      // handleSubmit={handleSubmit}
     />
   );
 };
@@ -34,7 +36,22 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //
-  console.log(username, "username Register");
+  // console.log(username, "username Register");
+  //
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    console.log("Hi");
+    try {
+      await axios.post("http://localhost:3009/auth/register", {
+        username,
+        password,
+      });
+      alert("regestration completed");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   //
   return (
     <Form
@@ -43,6 +60,7 @@ const Register = () => {
       password={password}
       setPassword={setPassword}
       label="Register"
+      onSubmit={handleSubmit}
     />
   );
 };
