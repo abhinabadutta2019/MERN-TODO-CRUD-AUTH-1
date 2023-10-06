@@ -39,8 +39,8 @@ const Register = () => {
     event.preventDefault();
     try {
       await axios.post("http://localhost:3009/auth/register", {
-        username,
-        password,
+        username: username,
+        password: password,
       });
       alert("Registration Completed! Now login.");
     } catch (error) {
