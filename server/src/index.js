@@ -1,8 +1,10 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
+//
+const userRouter = require("./routes/users.js");
 // console.log("Hi");
 
 const app = express();
@@ -10,6 +12,8 @@ const app = express();
 app.use(express.json);
 app.use(cors());
 dotenv.config();
+//
+app.use("/auth", userRouter);
 //
 ///////mongoDB cloud//////////////////
 let uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.te788iv.mongodb.net/MERN-todo-app?retryWrites=true&w=majority`;
