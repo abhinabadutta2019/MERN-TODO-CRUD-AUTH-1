@@ -10,17 +10,49 @@ const Auth = () => {
 };
 
 //
-const Login = () => <></>;
+const Login = () => {
+  //
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  //
+  console.log(username, "username Login");
+  //
+  return (
+    <Form
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      label="Login"
+    />
+  );
+};
 
 const Register = () => {
   //
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //
+  console.log(username, "username Register");
+  //
+  return (
+    <Form
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      label="Register"
+    />
+  );
+};
+
+//
+const Form = ({ username, setUsername, password, setPassword, label }) => {
   return (
     <div className="auth-container">
       <form>
-        <h2>Register</h2>
+        <h2>{label}</h2>
         {/*  */}
         <div className="form-group">
           <label htmlFor="username"> Username</label>
@@ -42,9 +74,10 @@ const Register = () => {
           />
         </div>
         {/*  */}
-        <button type="submit">Register</button>
+        <button type="submit">{label}</button>
       </form>
     </div>
   );
 };
+//
 export default Auth;
