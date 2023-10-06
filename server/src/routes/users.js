@@ -45,7 +45,17 @@ router.post("/login", async (req, res) => {
     }
 
     console.log(isPasswordValid, "isPasswordValid");
-    res.json({ messsage: "user loggedin", user: user });
+    //
+    //getting payload
+    const payload = { _id: user._id.toString() };
+
+    // console.log(process.env.JWT_SECRET);
+    //
+    const token = jwt.sign({ payload: payload }, process.env.JWT_SECRET);
+    //
+    console.log(token, "token");
+    //
+    res.json({ messsage: "user loggedin", token: token, user: user });
   } catch (err) {
     console.log(err);
     res.json(err);
