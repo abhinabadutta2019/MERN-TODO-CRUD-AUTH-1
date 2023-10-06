@@ -32,27 +32,39 @@ const Login = () => {
 };
 
 const Register = () => {
-  //
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  //
-  // console.log(username, "username Register");
-  //
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("Hi");
+    console.log("Form submitted");
+
     try {
-      await axios.post("http://localhost:3009/auth/register", {
-        username,
-        password,
+      const response = await fetch("http://localhost:3009/auth/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
       });
-      alert("regestration completed");
-    } catch (err) {
-      console.log(err);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Registration successful:", data);
+        alert("Registration completed");
+      } else {
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
-  //
+
   return (
     <Form
       username={username}
@@ -66,10 +78,18 @@ const Register = () => {
 };
 
 //
-const Form = ({ username, setUsername, password, setPassword, label }) => {
+const Form = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  label,
+  onSubmit,
+}) => {
   return (
     <div className="auth-container">
-      <form>
+      {/* error happening for - not -- adding onSubmit={onSubmit} */}
+      <form onSubmit={onSubmit}>
         <h2>{label}</h2>
         {/*  */}
         <div className="form-group">
