@@ -9,11 +9,10 @@ import { userRouter } from "./routes/users.js";
 
 const app = express();
 
-app.use(express.json);
+app.use(express.json());
 app.use(cors());
 dotenv.config();
-//
-app.use("/auth", userRouter);
+
 //
 ///////mongoDB cloud//////////////////
 let uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.te788iv.mongodb.net/MERN-todo-app?retryWrites=true&w=majority`;
@@ -34,6 +33,9 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 ////////////////////////////
+///Routes //
+app.use("/auth", userRouter);
+//
 
 const PORT = process.env.PORT || 3009;
 app.listen(PORT, () => console.log(`server is running on ${PORT}`));
