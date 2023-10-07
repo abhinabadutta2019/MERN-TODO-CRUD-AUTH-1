@@ -18,7 +18,10 @@ const Home = () => {
 
         //
         setRecipes(response.data.recipes);
-        console.log(response.data.recipes, "response.data");
+        console.log(
+          response.data.recipes,
+          "response.data.recipes--fetchRecipe"
+        );
       } catch (err) {
         console.log(err);
       }
