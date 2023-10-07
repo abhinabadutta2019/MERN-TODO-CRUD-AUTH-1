@@ -18,7 +18,7 @@ const SavedRecipes = () => {
         );
 
         //
-        // setSavedRecipes(response.data.savedRecipes);
+        setSavedRecipes(response.data.savedRecipes);
         //
         console.log(response.data.savedRecipes, "response.data.savedRecipes");
       } catch (err) {
