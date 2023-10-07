@@ -23,7 +23,7 @@ const Home = () => {
         console.log(err);
       }
     };
-    //
+    //fetchSavedRecipes - worked
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
@@ -31,9 +31,12 @@ const Home = () => {
         );
 
         //
-        // setSavedRecipes(response.data);
+        setSavedRecipes(response.data.savedRecipes);
         //
-        console.log(response.data, "response.data.savedRecipes");
+        console.log(
+          response.data.savedRecipes,
+          "response.data.savedRecipes--fetchSavedRecipes"
+        );
       } catch (err) {
         console.log(err);
       }
