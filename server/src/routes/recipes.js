@@ -54,18 +54,6 @@ router.put("/", async (req, res) => {
     const user = await User.findById(req.body.userId);
     //
     console.log(recipe, "recipe");
-    //
-    // user.savedRecipes.push(recipe);
-    // //
-    // // console.log(user.savedRecipes.push(recipe));
-    // const savedRecipesArr = await user.save();
-
-    // console.log(savedRecipesArr, "savedRecipesArr");
-
-    // Check if the recipeId is not already in the user's savedRecipes array
-    // if (user.savedRecipes.includes(recipe._id)) {
-    //   return res.json({ message: "Already saved to user array" });
-    // }
 
     user.savedRecipes.push(recipe);
     const savedRecipesArr = await user.save();
