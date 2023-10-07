@@ -70,11 +70,7 @@ router.post("/login", async (req, res) => {
     res.json(err);
   }
 });
-
 //
-
-export { router as userRouter };
-
 //middleware
 export const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
@@ -91,3 +87,7 @@ export const verifyToken = (req, res, next) => {
     //user is not verified
   }
 };
+
+//
+
+export { router as userRouter };
