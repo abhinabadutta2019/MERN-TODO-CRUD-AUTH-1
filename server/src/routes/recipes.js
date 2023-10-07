@@ -37,15 +37,6 @@ router.post("/", async (req, res) => {
     //
     res.json({
       message: "recipes created",
-      //   newRecipe: {
-      //     name: createdRecipe.name,
-      //     ingredients: createdRecipe.ingredients,
-      //     instructions: createdRecipe.instructions,
-      //     imageUrl: createdRecipe.imageUrl,
-      //     cookingTime: createdRecipe.cookingTime,
-      //     userOwner: createdRecipe.userOwner,
-      //   },
-      //   newRecipe: { ...createdRecipe._doc() },
       newRecipe: createdRecipe.toObject(),
     });
   } catch (err) {
