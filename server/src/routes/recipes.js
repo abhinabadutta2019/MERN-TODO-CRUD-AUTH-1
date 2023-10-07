@@ -81,9 +81,9 @@ router.get("/savedRecipes/:userId", async (req, res) => {
   }
 });
 // Get saved recipes
-router.get("/savedRecipes", async (req, res) => {
+router.get("/savedRecipes/:userId", async (req, res) => {
   try {
-    const user = await User.findById(req.body.userId);
+    const user = await User.findById(req.params.userId);
     const savedRecipes = await Recipe.find({ _id: { $in: user.savedRecipes } });
     res.json({ savedRecipes: savedRecipes });
   } catch (err) {

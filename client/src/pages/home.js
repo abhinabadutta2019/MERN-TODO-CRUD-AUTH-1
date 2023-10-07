@@ -31,9 +31,9 @@ const Home = () => {
         );
 
         //
-        setSavedRecipes(response.data.savedRecipes);
+        // setSavedRecipes(response.data);
         //
-        // console.log(response.data.savedRecipes, "response.data.savedRecipes");
+        console.log(response.data, "response.data.savedRecipes");
       } catch (err) {
         console.log(err);
       }
@@ -54,7 +54,7 @@ const Home = () => {
       setSavedRecipes(response.data.savedRecipes);
       //
       // setRecipes(response.data.recipes);
-      // console.log(response.data.savedRecipes, "response");
+      console.log(response.data.savedRecipes, "response");
     } catch (err) {
       console.log(err);
     }
