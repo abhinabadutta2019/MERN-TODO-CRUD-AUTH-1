@@ -12,8 +12,8 @@ const Home = () => {
         const response = await axios.get("http://localhost:3009/recipe");
 
         //
-        setRecipes(response.data);
-        console.log(response.data, "response.data");
+        setRecipes(response.data.recipes);
+        console.log(response.data.recipes, "response.data");
       } catch (err) {
         console.log(err);
       }
@@ -28,9 +28,10 @@ const Home = () => {
     <div>
       <h1>Recipes</h1>
       <ul>
-        {recipes.map((recipe) => {
+        {recipes.map((recipe, index) => {
           return (
-            <li key={recipe.id}>
+            <li key={recipe._id}>
+              {/*  <li key={index}> */}
               <div>
                 <h2>{recipe.name}</h2>
               </div>

@@ -36,6 +36,7 @@ const Login = () => {
       // alert("Registration Completed! Now login.");
       //
       setCookies("access_token", response.data.token);
+      // loacal storage
       window.localStorage.setItem("userID", response.data.userID);
       //redirect to home after login
       navigate("/");
