@@ -70,7 +70,7 @@ router.put("/", async (req, res) => {
     user.savedRecipes.push(recipe);
     const savedRecipesArr = await user.save();
 
-    console.log(savedRecipesArr, "savedRecipesArr");
+    // console.log(savedRecipesArr, "savedRecipesArr");
 
     //
     res.json({
@@ -82,9 +82,11 @@ router.put("/", async (req, res) => {
 });
 
 // Get id of saved recipes
-router.get("/savedRecipes/ids", async (req, res) => {
+router.get("/savedRecipes/:userId", async (req, res) => {
   try {
-    const user = await User.findById(req.body.userId);
+    console.log(req.params, "req.params from savedRecipes ");
+    const user = await User.findById(req.params.userId);
+
     res.json({ savedRecipes: user?.savedRecipes });
   } catch (err) {
     res.json(err);
