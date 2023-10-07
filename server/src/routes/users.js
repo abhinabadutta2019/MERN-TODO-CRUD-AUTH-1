@@ -13,13 +13,10 @@ router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    console.log(username, "username");
-    console.log(password, "password");
-
     const user = await User.findOne({ username: username });
 
     if (user) {
-      return res.json({ messsage: "User already exists" });
+      return res.status(401).json({ messsage: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,10 +25,12 @@ router.post("/register", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    res.json({ messsage: "user regestered", user: savedUser });
+    return res
+      .status(201)
+      .json({ messsage: "user regestered", user: savedUser });
   } catch (err) {
     console.log(err);
-    res.json(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 //
