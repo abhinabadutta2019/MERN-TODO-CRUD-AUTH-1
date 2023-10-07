@@ -2,7 +2,9 @@ import express from "express";
 //mention .js -- or error happen when export
 import { Recipe } from "../models/Recipes.js";
 import { User } from "../models/Users.js";
+import { verifyToken } from "./users.js";
 const router = express.Router();
+
 //
 //get all
 router.get("/", async (req, res) => {
@@ -20,7 +22,7 @@ router.get("/", async (req, res) => {
 });
 
 // create
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   try {
     const recipe = new Recipe({
       name: req.body.name,
@@ -48,7 +50,7 @@ router.post("/", async (req, res) => {
 });
 //
 // update
-router.put("/", async (req, res) => {
+router.put("/", verifyToken, async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.body.recipeId);
     const user = await User.findById(req.body.userId);
@@ -81,7 +83,7 @@ router.get("/savedRecipes/ids/:userId", async (req, res) => {
   }
 });
 // Get saved recipes
-router.get("/savedRecipes/:userId", async (req, res) => {
+router.get("/savedRecipes/:userId", verifyToken, async (req, res) => {
   try {
     console.log(req.params, "req.params from savedRecipes");
     const user = await User.findById(req.params.userId);

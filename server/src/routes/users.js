@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
 });
 //
 //middleware
-export const verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err) => {
@@ -90,4 +90,4 @@ export const verifyToken = (req, res, next) => {
 
 //
 
-export { router as userRouter };
+export { router as userRouter, verifyToken };
