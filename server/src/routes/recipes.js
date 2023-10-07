@@ -50,11 +50,15 @@ router.post("/", async (req, res) => {
 // update
 router.put("/", async (req, res) => {
   try {
-    const recipe = await Recipe(req.body.recipeId);
+    const recipe = await Recipe.findById(req.body.recipeId);
     const user = await User.findById(req.body.userId);
     //
     user.savedRecipes.push(recipe);
+    //
+    // console.log(user.savedRecipes.push(recipe));
     const savedRecipesArr = await user.save();
+
+    console.log(savedRecipesArr, "savedRecipesArr");
     //
 
     //

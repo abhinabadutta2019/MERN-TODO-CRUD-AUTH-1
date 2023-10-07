@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useGetUserId } from "../hooks/useGetUserId";
 
 const Home = () => {
   //
   const [recipes, setRecipes] = useState([]);
+  const userId = useGetUserId();
   //
   useEffect(() => {
     //directly - not recomment to use async with useEffect
@@ -22,6 +24,23 @@ const Home = () => {
     fetchRecipe();
   }, []);
   //
+  const saveRecipe = async (recipeId) => {
+    try {
+      const response = await axios.put("http://localhost:3009/recipe", {
+        recipeId: recipeId,
+        userId: userId,
+      });
+
+      //
+      //
+      // setRecipes(response.data.recipes);
+      console.log(response, "response");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //
 
   //
   return (
@@ -34,6 +53,8 @@ const Home = () => {
               {/*  <li key={index}> */}
               <div>
                 <h2>{recipe.name}</h2>
+                {/*  */}
+                <button onClick={() => saveRecipe(recipe._id)}>Save</button>
               </div>
               <div className="instructions">
                 <p>{recipe.instructions}</p>
