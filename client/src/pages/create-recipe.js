@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 const CreateRecipe = () => {
@@ -27,13 +28,24 @@ const CreateRecipe = () => {
     setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ""] });
   };
 
-  console.log(recipe, "recipe");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3009/recipe", recipe);
+      alert("Recipe created");
+      console.log(response, "response");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // console.log(recipe, "recipe");
   //
   return (
     <div className="create-recipe">
       <h2>Create Recipe</h2>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <label htmlFor="name">Name</label>
         <input type="text" name="name" id="name" onChange={handleChange} />
         {/*  */}
