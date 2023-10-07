@@ -63,9 +63,12 @@ router.put("/", verifyToken, async (req, res) => {
     // console.log(savedRecipesArr, "savedRecipesArr");
 
     //
-    return res.status(201).json({
-      savedRecipes: user.savedRecipes,
-    });
+    return res
+      .status(201)
+      .json({
+        message: "recipe saved successfully",
+        savedRecipes: user.savedRecipes,
+      });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });

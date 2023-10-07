@@ -65,6 +65,14 @@ const Home = () => {
           headers: { authorization: cookies.access_token },
         }
       );
+      //
+      if (response.status !== 201) {
+        alert("failed to save");
+      }
+
+      // else {
+      //   alert("Registration Completed! Now login.");
+      // }
 
       //
       setSavedRecipes(response.data.savedRecipes);
@@ -73,6 +81,7 @@ const Home = () => {
       console.log(response.data.savedRecipes, "response");
     } catch (err) {
       console.log(err);
+      alert("An error occurred while trying to save.");
     }
   };
 
