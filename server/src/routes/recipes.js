@@ -3,7 +3,7 @@ import express from "express";
 import { Recipe } from "../models/Recipes.js";
 const router = express.Router();
 //
-
+//get all
 router.get("/", async (req, res) => {
   try {
     const recipes = await Recipe.find({});
@@ -37,14 +37,16 @@ router.post("/", async (req, res) => {
     //
     res.json({
       message: "recipes created",
-      newRecipe: {
-        name: createdRecipe.name,
-        ingredients: createdRecipe.ingredients,
-        instructions: createdRecipe.instructions,
-        imageUrl: createdRecipe.imgageUrl,
-        cookingTime: createdRecipe.cookingTime,
-        userOwner: createdRecipe.userOwner,
-      },
+      //   newRecipe: {
+      //     name: createdRecipe.name,
+      //     ingredients: createdRecipe.ingredients,
+      //     instructions: createdRecipe.instructions,
+      //     imageUrl: createdRecipe.imageUrl,
+      //     cookingTime: createdRecipe.cookingTime,
+      //     userOwner: createdRecipe.userOwner,
+      //   },
+      //   newRecipe: { ...createdRecipe._doc() },
+      newRecipe: createdRecipe.toObject(),
     });
   } catch (err) {
     res.json(err);
