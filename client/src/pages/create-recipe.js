@@ -1,16 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
+import { useGetUserId } from "../hooks/useGetUserId.js";
 
 const CreateRecipe = () => {
   //
+
+  const userID = useGetUserId();
+
+  console.log(userID, "userID");
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: [],
     instructions: "",
     imageUrl: "",
     cookingTime: 0,
-    userOwner: 0,
+    userOwner: userID,
   });
+
   //
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +37,9 @@ const CreateRecipe = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3009/recipe", recipe);
+      const response = await axios.post("http://localhost:3009/recipe", {
+        ...recipe,
+      });
       alert("Recipe created");
       console.log(response, "response");
     } catch (err) {
@@ -39,7 +47,8 @@ const CreateRecipe = () => {
     }
   };
 
-  // console.log(recipe, "recipe");
+  console.log(recipe, "recipe");
+
   //
   return (
     <div className="create-recipe">

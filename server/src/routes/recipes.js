@@ -36,6 +36,8 @@ router.post("/", async (req, res) => {
     //
     const createdRecipe = await recipe.save();
     //
+    console.log(createdRecipe, "createdRecipe");
+
     res.json({
       message: "recipes created",
       newRecipe: createdRecipe.toObject(),
