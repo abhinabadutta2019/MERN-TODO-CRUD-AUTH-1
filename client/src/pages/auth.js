@@ -14,11 +14,11 @@ const Auth = () => {
 
 //
 const Login = () => {
+  const [_, setCookies] = useCookies(["access_token"]);
   //
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //
-  const [_, setCookies] = useCookies(["access_token"]);
 
   //for redirection
   const navigate = useNavigate();
