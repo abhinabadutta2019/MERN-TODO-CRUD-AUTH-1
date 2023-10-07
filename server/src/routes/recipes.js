@@ -63,9 +63,9 @@ router.put("/", async (req, res) => {
     // console.log(savedRecipesArr, "savedRecipesArr");
 
     // Check if the recipeId is not already in the user's savedRecipes array
-    if (user.savedRecipes.includes(recipe._id)) {
-      return res.json({ message: "Already saved to user array" });
-    }
+    // if (user.savedRecipes.includes(recipe._id)) {
+    //   return res.json({ message: "Already saved to user array" });
+    // }
 
     user.savedRecipes.push(recipe);
     const savedRecipesArr = await user.save();
@@ -74,7 +74,7 @@ router.put("/", async (req, res) => {
 
     //
     res.json({
-      savedRecipesArr: savedRecipesArr,
+      savedRecipes: user.savedRecipes,
     });
   } catch (err) {
     res.json(err);

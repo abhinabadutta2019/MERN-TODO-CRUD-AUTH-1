@@ -31,7 +31,7 @@ const Home = () => {
         );
 
         //
-        setSavedRecipes(response.data.savedRecipes);
+        // setSavedRecipes(response.data.savedRecipes);
         //
         console.log(response.data.savedRecipes, "response.data.savedRecipes");
       } catch (err) {
@@ -51,15 +51,19 @@ const Home = () => {
       });
 
       //
+      setSavedRecipes(response.data.savedRecipes);
       //
       // setRecipes(response.data.recipes);
-      console.log(response, "response");
+      // console.log(response.data.savedRecipes, "response");
     } catch (err) {
       console.log(err);
     }
   };
 
+  // const isRecipeSaved = (recipeId) => saveRecipe.includes(recipeId);
+
   //
+  const isRecipeSaved = (recipeId) => savedRecipes.includes(recipeId);
 
   //
   return (
@@ -69,12 +73,17 @@ const Home = () => {
         {recipes.map((recipe, index) => {
           return (
             <li key={recipe._id}>
-              {savedRecipes.includes(recipe._id) && <h2>Already saved</h2>}
+              {/* {savedRecipes.includes(recipe._id) && <h2>Already saved</h2>} */}
               {/*  <li key={index}> */}
               <div>
                 <h2>{recipe.name}</h2>
                 {/*  */}
-                <button onClick={() => saveRecipe(recipe._id)}>Save</button>
+                <button
+                  onClick={() => saveRecipe(recipe._id)}
+                  disabled={isRecipeSaved(recipe._id)}
+                >
+                  {isRecipeSaved(recipe._id) ? <>Saved</> : <>Save</>}
+                </button>
               </div>
               <div className="instructions">
                 <p>{recipe.instructions}</p>
