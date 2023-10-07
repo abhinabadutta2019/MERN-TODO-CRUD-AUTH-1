@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
     //
     return res.status(201).json({
       message: "Successful login",
-      token: "your_jwt_token_here",
+      token: token,
       userID: user._id,
     });
   } catch (err) {

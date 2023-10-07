@@ -69,13 +69,26 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3009/auth/register", {
+      const response = await axios.post("http://localhost:3009/auth/register", {
         username: username,
         password: password,
       });
-      alert("Registration Completed! Now login.");
+
+      //
+      if (response.status !== 201) {
+        alert("Login failed");
+      } else {
+        alert("Registration Completed! Now login.");
+        // setCookies("access_token", response.data.token);
+        // // loacal storage
+        // window.localStorage.setItem("userID", response.data.userID);
+        // //redirect to home after login
+        // navigate("/");
+      }
+      //
     } catch (error) {
       console.error(error);
+      alert("Regestration not successful");
     }
   };
 
