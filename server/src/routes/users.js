@@ -40,12 +40,14 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });
     if (!user) {
-      return res.json({ messsage: "User doesn't exists" });
+      // return res.json({ messsage: "User doesn't exists" });
+      return res.status(401).json({ message: "User doesn't exist" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.json({ messsage: "wrong password" });
+      // return res.json({ messsage: "wrong password" });
+      return res.status(401).json({ message: "Wrong password" });
     }
 
     console.log(isPasswordValid, "isPasswordValid");
@@ -59,15 +61,15 @@ router.post("/login", async (req, res) => {
     //
     console.log(token, "token");
     //
-    res.json({
-      messsage: "user loggedin",
-      token: token,
+    return res.status(201).json({
+      message: "Successful login",
+      token: "your_jwt_token_here",
       userID: user._id,
-      // user: user,
     });
   } catch (err) {
     console.log(err);
-    res.json(err);
+    // res.json(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 //

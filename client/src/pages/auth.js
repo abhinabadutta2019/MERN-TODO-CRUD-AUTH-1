@@ -33,15 +33,19 @@ const Login = () => {
         password: password,
       });
       console.log(response, "response");
-      // alert("Registration Completed! Now login.");
-      //
-      setCookies("access_token", response.data.token);
-      // loacal storage
-      window.localStorage.setItem("userID", response.data.userID);
-      //redirect to home after login
-      navigate("/");
+
+      if (response.status !== 201) {
+        alert("Login failed");
+      } else {
+        setCookies("access_token", response.data.token);
+        // loacal storage
+        window.localStorage.setItem("userID", response.data.userID);
+        //redirect to home after login
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
+      alert("An error occurred while logging in.");
     }
   };
   //
