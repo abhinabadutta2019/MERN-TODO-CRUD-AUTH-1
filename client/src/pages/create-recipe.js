@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { useGetUserId } from "../hooks/useGetUserId.js";
+import { useNavigate } from "react-router-dom";
 
 const CreateRecipe = () => {
   //
 
   const userID = useGetUserId();
-
-  console.log(userID, "userID");
+  // console.log(userID, "userID");
+  //
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: [],
@@ -16,6 +17,10 @@ const CreateRecipe = () => {
     cookingTime: 0,
     userOwner: userID,
   });
+
+  //
+  //for redirection
+  const navigate = useNavigate();
 
   //
   const handleChange = (e) => {
@@ -41,13 +46,15 @@ const CreateRecipe = () => {
         ...recipe,
       });
       alert("Recipe created");
-      console.log(response, "response");
+      // console.log(response, "response");
+      //redirect to home after login
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(recipe, "recipe");
+  // console.log(recipe, "recipe");
 
   //
   return (
