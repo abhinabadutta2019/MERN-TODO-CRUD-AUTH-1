@@ -1,6 +1,7 @@
 import express from "express";
 //mention .js -- or error happen when export
 import { Recipe } from "../models/Recipes.js";
+import { User } from "../models/Users.js";
 const router = express.Router();
 //
 //get all
@@ -43,5 +44,45 @@ router.post("/", async (req, res) => {
     res.json(err);
   }
 });
+//
+// update
+router.put("/", async (req, res) => {
+  try {
+    const recipe = await Recipe(req.body.recipeId);
+    const user = await User.findById(req.body.userId);
+    //
+    user.savedRecipes.push(recipe);
+    const savedRecipesArr = await user.save();
+    //
+
+    //
+    res.json({
+      savedRecipesArr: savedRecipesArr,
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+// Get id of saved recipes
+router.get("/savedRecipes/ids", async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    res.json({ savedRecipes: user?.savedRecipes });
+  } catch (err) {
+    res.json(err);
+  }
+});
+// Get saved recipes
+router.get("/savedRecipes", async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    const savedRecipes = await Recipe.find({ _id: { $in: user.savedRecipes } });
+    res.json({ savedRecipes: savedRecipes });
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 //
 export { router as recipeRouter };
