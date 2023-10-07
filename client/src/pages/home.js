@@ -47,7 +47,10 @@ const Home = () => {
     };
     // calling the functions--created inside useEffects
     fetchRecipe();
-    fetchSavedRecipes();
+    //check if has acces token, then try to show saved (button related)
+    if (cookies.access_token) {
+      fetchSavedRecipes();
+    }
   }, []);
   //
   const saveRecipe = async (recipeId) => {
