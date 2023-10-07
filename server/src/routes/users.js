@@ -2,6 +2,7 @@ import express from "express";
 
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+//mention .js --or error happen when export
 import { User } from "../models/Users.js";
 
 const router = express.Router();

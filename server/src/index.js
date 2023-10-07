@@ -3,8 +3,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-//
+// importing routes
 import { userRouter } from "./routes/users.js";
+import { recipeRouter } from "./routes/recipes.js";
 // console.log("Hi");
 
 const app = express();
@@ -45,6 +46,7 @@ db.once("open", () => {
 ////////////////////////////
 ///Routes //
 app.use("/auth", userRouter);
+app.use("/recipe", recipeRouter);
 //
 
 const PORT = process.env.PORT || 3009;
