@@ -11,18 +11,18 @@ import { recipeRouter } from "./routes/recipes.js";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 dotenv.config();
 //
 
-// Configure CORS to allow requests from localhost:3000
-// const corsOptions = {
-//   origin: "http://localhost:3000",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true, // If your API supports cookies or authentication headers
-// };
-// //
-// app.use(cors(corsOptions));
+// Configure CORS to allow requests from your frontend URL
+const corsOptions = {
+  origin: "https://mern-recipe-frontend.onrender.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // If your API supports cookies or authentication headers
+};
+
+app.use(cors(corsOptions));
 
 //
 ///////mongoDB cloud//////////////////
