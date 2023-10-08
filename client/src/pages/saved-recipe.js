@@ -11,11 +11,11 @@ const SavedRecipes = () => {
   const userId = useGetUserId();
   //
   useEffect(() => {
-    //
+    //http://localhost:3009/recipe/savedRecipes/${userId}
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3009/recipe/savedRecipes/${userId}`,
+          `https://mern-recipe-backend.onrender.com/recipe/savedRecipes/${userId}`,
           {
             headers: { authorization: cookies.access_token },
           }

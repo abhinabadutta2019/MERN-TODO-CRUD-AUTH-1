@@ -40,12 +40,12 @@ const CreateRecipe = () => {
   const addIngredients = () => {
     setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ""] });
   };
-
+  //"http://localhost:3009/recipe"
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3009/recipe",
+        "https://mern-recipe-backend.onrender.com/recipe",
         {
           ...recipe,
         },

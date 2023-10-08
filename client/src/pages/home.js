@@ -13,9 +13,13 @@ const Home = () => {
   //
   useEffect(() => {
     //directly - not recomment to use async with useEffect
+    //"http://localhost:3009/recipe"
+
     const fetchRecipe = async () => {
       try {
-        const response = await axios.get("http://localhost:3009/recipe");
+        const response = await axios.get(
+          "https://mern-recipe-backend.onrender.com/recipe"
+        );
 
         //
         setRecipes(response.data.recipes);
@@ -28,10 +32,11 @@ const Home = () => {
       }
     };
     //fetchSavedRecipes - worked
+    //`http://localhost:3009/recipe/savedRecipes/ids/${userId}`
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3009/recipe/savedRecipes/ids/${userId}`
+          `https://mern-recipe-backend.onrender.com/recipe/savedRecipes/ids/${userId}`
         );
 
         //
@@ -53,10 +58,11 @@ const Home = () => {
     }
   }, []);
   //
+  //"http://localhost:3009/recipe"
   const saveRecipe = async (recipeId) => {
     try {
       const response = await axios.put(
-        "http://localhost:3009/recipe",
+        "https://mern-recipe-backend.onrender.com/recipe",
         {
           recipeId: recipeId,
           userId: userId,
