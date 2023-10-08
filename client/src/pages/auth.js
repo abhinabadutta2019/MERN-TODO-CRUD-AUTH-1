@@ -23,15 +23,18 @@ const Login = () => {
   //for redirection
   const navigate = useNavigate();
 
-  //
+  //"http://localhost:3009/auth/login"
   // console.log(username, "username Login");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3009/auth/login", {
-        username: username,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://mern-recipe-backend.onrender.com/auth/login",
+        {
+          username: username,
+          password: password,
+        }
+      );
       console.log(response, "response");
 
       if (response.status !== 201) {
@@ -61,7 +64,7 @@ const Login = () => {
     />
   );
 };
-
+//"http://localhost:3009/auth/register"
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -69,10 +72,13 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3009/auth/register", {
-        username: username,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://mern-recipe-backend.onrender.com/auth/register",
+        {
+          username: username,
+          password: password,
+        }
+      );
 
       //
       if (response.status !== 201) {
